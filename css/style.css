@@ -119,3 +119,37 @@ textarea:focus {
   margin-top: 0;
   color: #2563eb;
 }
+.question-card {
+  background-color: #f9fafb;
+  border: 1px solid #ddd;
+  padding: 18px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.question-card h3 {
+  margin-top: 0;
+  color: #16a34a;
+}
+
+.correct-answer {
+  color: #16a34a;
+  font-weight: bold;
+}
+.answer-option {
+  display: block;
+  background-color: white;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.answer-option:hover {
+  background-color: #eef2ff;
+}
+
+.answer-option input {
+  margin-left: 8px;
+}

@@ -10,17 +10,39 @@
 
   <header class="main-header">
     <h1>ביצוע מבחן</h1>
-    <p>דף זה ייבנה בשלב הבא</p>
+    <p>ענה על השאלות ושלח את המבחן</p>
   </header>
 
   <main class="container">
-    <section class="card">
-      <h2>ביצוע מבחן</h2>
-      <p>בשלב הבא נוסיף כאן שאלות, בחירת תשובות, חישוב ציון ושמירת תוצאה.</p>
 
-      <a href="search-exam.html" class="btn btn-secondary">חזרה לחיפוש מבחן</a>
+    <section class="card">
+      <h2 id="examTitle"></h2>
+      <p id="examDescription"></p>
+
+      <p><strong>קטגוריה:</strong> <span id="examCategory"></span></p>
+      <p><strong>קוד מבחן:</strong> <span id="examCode"></span></p>
+      <p><strong>משך זמן:</strong> <span id="examDuration"></span> דקות</p>
     </section>
+
+    <section class="card">
+      <h2>שאלות המבחן</h2>
+
+      <form id="takeExamForm">
+        <div id="questionsContainer"></div>
+
+        <button type="submit" class="btn">סיום ושליחת מבחן</button>
+        <a href="search-exam.html" class="btn btn-secondary">חזרה לחיפוש</a>
+      </form>
+    </section>
+
+    <section class="card" id="resultCard" style="display: none;">
+      <h2>תוצאה</h2>
+      <p id="resultText"></p>
+      <a href="student-dashboard.html" class="btn">חזרה לדף סטודנט</a>
+    </section>
+
   </main>
 
+  <script type="module" src="js/takeExam.js"></script>
 </body>
 </html>
