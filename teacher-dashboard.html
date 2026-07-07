@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>דף מורה</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="main-header">
+    <h1>דף ראשי למורה</h1>
+    <p>ניהול מבחנים</p>
+  </header>
+
+  <main class="container">
+
+    <section class="card">
+      <h2>ברוך הבא, <span id="teacherName"></span></h2>
+      <p>כאן ניתן ליצור מבחנים, לצפות במבחנים קיימים ולנהל אותם.</p>
+
+      <button id="logoutBtn" class="btn btn-danger">התנתקות</button>
+    </section>
+
+    <section class="card">
+      <h2>יצירת מבחן חדש</h2>
+
+      <form id="createExamForm">
+        <label>שם המבחן</label>
+        <input type="text" id="examTitle" required>
+
+        <label>תיאור המבחן</label>
+        <textarea id="examDescription" required></textarea>
+
+        <label>קטגוריה</label>
+        <input type="text" id="examCategory" placeholder="לדוגמה: JavaScript" required>
+
+        <label>קוד למציאת מבחן</label>
+        <input type="text" id="examCode" placeholder="לדוגמה: JS101" required>
+
+        <label>משך זמן בדקות</label>
+        <input type="number" id="examDuration" min="1" required>
+
+        <button type="submit" class="btn">צור מבחן</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>המבחנים שלי</h2>
+      <div id="teacherExamsList"></div>
+    </section>
+
+  </main>
+
+  <script type="module" src="js/teacherDashboard.js"></script>
+</body>
+</html>

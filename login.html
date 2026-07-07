@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>התחברות</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="main-header">
+    <h1>התחברות למערכת</h1>
+    <p>כניסה לפי סוג משתמש</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>טופס התחברות</h2>
+
+      <form id="loginForm">
+        <label>אימייל</label>
+        <input type="email" id="email" required>
+
+        <label>סיסמה</label>
+        <input type="password" id="password" required>
+
+        <button type="submit" class="btn">התחברות</button>
+      </form>
+
+      <p>
+        אין לך חשבון?
+        <a href="register.html">הירשם כאן</a>
+      </p>
+
+      <a href="index.html">חזרה לדף הראשי</a>
+    </section>
+  </main>
+
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>
