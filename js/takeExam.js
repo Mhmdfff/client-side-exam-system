@@ -1,4 +1,4 @@
- import { AuthService } from "./services/AuthService.js";
+import { AuthService } from "./services/AuthService.js";
 import { ExamService } from "./services/ExamService.js";
 import { ResultService } from "./services/ResultService.js";
 
@@ -30,10 +30,14 @@ const examDescription = document.getElementById("examDescription");
 const examCategory = document.getElementById("examCategory");
 const examCode = document.getElementById("examCode");
 const examDuration = document.getElementById("examDuration");
+const timerDisplay = document.getElementById("timerDisplay");
 const questionsContainer = document.getElementById("questionsContainer");
 const takeExamForm = document.getElementById("takeExamForm");
 const resultCard = document.getElementById("resultCard");
 const resultText = document.getElementById("resultText");
+
+let examSubmitted = false;
+let timerInterval = null;
 
 examTitle.textContent = exam.title;
 examDescription.textContent = exam.description;
@@ -63,8 +67,7 @@ function renderQuestions() {
           <input 
             type="radio" 
             name="question-${question.id}" 
-            value="${optionIndex}" 
-            required
+            value="${optionIndex}"
           >
           ${option}
         </label>
@@ -81,9 +84,38 @@ function renderQuestions() {
   });
 }
 
+// Start countdown timer
+function startTimer() {
+  let timeLeft = Number(exam.duration) * 60;
+
+  timerInterval = setInterval(function () {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+
+    timerDisplay.textContent =
+      `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      alert("הזמן נגמר! המבחן יישלח אוטומטית.");
+      submitExam(true);
+    }
+
+    timeLeft--;
+  }, 1000);
+}
+
 // Submit exam and calculate score
-takeExamForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+function submitExam(isAutoSubmit = false) {
+  if (examSubmitted) {
+    return;
+  }
+
+  examSubmitted = true;
+
+  if (timerInterval) {
+    clearInterval(timerInterval);
+  }
 
   let correctAnswers = 0;
   const studentAnswers = [];
@@ -93,8 +125,13 @@ takeExamForm.addEventListener("submit", function (event) {
       `input[name="question-${question.id}"]:checked`
     );
 
-    const selectedIndex = Number(selectedAnswer.value);
-    const isCorrect = selectedIndex === question.correctAnswerIndex;
+    let selectedIndex = null;
+    let isCorrect = false;
+
+    if (selectedAnswer) {
+      selectedIndex = Number(selectedAnswer.value);
+      isCorrect = selectedIndex === question.correctAnswerIndex;
+    }
 
     if (isCorrect) {
       correctAnswers++;
@@ -124,9 +161,24 @@ takeExamForm.addEventListener("submit", function (event) {
   resultCard.style.display = "block";
 
   resultText.innerHTML = `
+    ${isAutoSubmit ? "<strong>המבחן נשלח אוטומטית כי הזמן נגמר.</strong><br><br>" : ""}
     <strong>הציון שלך:</strong> ${score}<br>
     <strong>תשובות נכונות:</strong> ${correctAnswers} מתוך ${exam.questions.length}
   `;
+}
+
+takeExamForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const confirmSubmit = confirm("האם אתה בטוח שברצונך לשלוח את המבחן?");
+
+  if (confirmSubmit) {
+    submitExam(false);
+  }
 });
 
 renderQuestions();
+
+if (exam.questions.length > 0) {
+  startTimer();
+}
