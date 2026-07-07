@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>חיפוש מבחן</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="main-header">
+    <h1>חיפוש מבחן</h1>
+    <p>חיפוש לפי שם מבחן, קוד מבחן או קטגוריה</p>
+  </header>
+
+  <main class="container">
+
+    <section class="card">
+      <h2>חפש מבחן</h2>
+
+      <form id="searchExamForm">
+        <label>שם / קוד / קטגוריה</label>
+        <input type="text" id="searchInput" placeholder="לדוגמה: JS101 או JavaScript" required>
+
+        <button type="submit" class="btn">חפש</button>
+        <a href="student-dashboard.html" class="btn btn-secondary">חזרה לדף סטודנט</a>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>תוצאות חיפוש</h2>
+      <div id="searchResults"></div>
+    </section>
+
+  </main>
+
+  <script type="module" src="js/searchExam.js"></script>
+</body>
+</html>
