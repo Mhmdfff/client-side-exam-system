@@ -1,5 +1,6 @@
 import { AuthService } from "./services/AuthService.js";
 import { ExamService } from "./services/ExamService.js";
+import { ResultService } from "./services/ResultService.js";
 
 const currentUser = AuthService.getCurrentUser();
 
@@ -32,7 +33,7 @@ if (exam.teacherId !== currentUser.id) {
 const editExamForm = document.getElementById("editExamForm");
 const addQuestionForm = document.getElementById("addQuestionForm");
 const questionsList = document.getElementById("questionsList");
-
+const examResultsList = document.getElementById("examResultsList");
 const examIdInput = document.getElementById("examId");
 const examTitleInput = document.getElementById("examTitle");
 const examDescriptionInput = document.getElementById("examDescription");
@@ -169,6 +170,33 @@ function renderQuestions() {
     });
   });
 }
+// Show student results for this exam
+function renderExamResults() {
+  const results = ResultService.getResultsByExam(examId);
 
+  if (results.length === 0) {
+    examResultsList.innerHTML = "<p>עדיין אין תוצאות למבחן זה.</p>";
+    return;
+  }
+
+  examResultsList.innerHTML = "";
+
+  results.forEach(result => {
+    const correctCount = result.answers.filter(answer => answer.isCorrect).length;
+
+    const resultCard = document.createElement("div");
+    resultCard.className = "result-card";
+
+    resultCard.innerHTML = `
+      <h3>${result.studentName}</h3>
+      <p><strong>ציון:</strong> ${result.score}</p>
+      <p><strong>תשובות נכונות:</strong> ${correctCount} מתוך ${result.totalQuestions}</p>
+      <p><strong>תאריך:</strong> ${result.date}</p>
+    `;
+
+    examResultsList.appendChild(resultCard);
+  });
+}
 loadExamData();
 renderQuestions();
+renderExamResults();
