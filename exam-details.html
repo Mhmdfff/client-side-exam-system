@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>פרטי מבחן</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="main-header">
+    <h1>פרטי מבחן</h1>
+    <p>ניהול מבחן ושאלות</p>
+  </header>
+
+  <main class="container">
+
+    <section class="card">
+      <h2>מידע כללי</h2>
+
+      <form id="editExamForm">
+        <label>ID מבחן</label>
+        <input type="text" id="examId" disabled>
+
+        <label>שם המבחן</label>
+        <input type="text" id="examTitle" required>
+
+        <label>תיאור</label>
+        <textarea id="examDescription" required></textarea>
+
+        <label>קטגוריה</label>
+        <input type="text" id="examCategory" required>
+
+        <label>קוד למציאת מבחן</label>
+        <input type="text" id="examCode" required>
+
+        <label>משך זמן בדקות</label>
+        <input type="number" id="examDuration" min="1" required>
+
+        <button type="submit" class="btn">שמור שינויים</button>
+        <a href="teacher-dashboard.html" class="btn btn-secondary">חזרה לדף מורה</a>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>הוספת שאלה</h2>
+
+      <form id="addQuestionForm">
+        <label>טקסט השאלה</label>
+        <textarea id="questionText" required></textarea>
+
+        <label>תשובה 1</label>
+        <input type="text" id="option1" required>
+
+        <label>תשובה 2</label>
+        <input type="text" id="option2" required>
+
+        <label>תשובה 3</label>
+        <input type="text" id="option3" required>
+
+        <label>תשובה 4</label>
+        <input type="text" id="option4" required>
+
+        <label>התשובה הנכונה</label>
+        <select id="correctAnswer" required>
+          <option value="0">תשובה 1</option>
+          <option value="1">תשובה 2</option>
+          <option value="2">תשובה 3</option>
+          <option value="3">תשובה 4</option>
+        </select>
+
+        <button type="submit" class="btn">הוסף שאלה</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>שאלות המבחן</h2>
+      <div id="questionsList"></div>
+    </section>
+
+  </main>
+
+  <script type="module" src="js/examDetails.js"></script>
+</body>
+</html>
